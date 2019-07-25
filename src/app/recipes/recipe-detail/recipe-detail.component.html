@@ -1,32 +1,36 @@
-<div class="row">
-  <div class="col">
-    <img src="" alt="" class="img-fluid">
+<div class="row m-2 float-right" style="position: fixed">
+  <div class="col-7">
+    <img [src]="recipe.imagePath" [alt]="recipe.name" class="img-fluid img-thumbnail" style="max-height: 400px">
   </div>
-</div>
-<div class="row">
-  <div class="col">
-    <h1>Recipe Name</h1>
-  </div>
-</div>
-<div class="row">
-  <div class="col">
-    <div class="btn-group">
-      <button class="btn btn-primary dropdown-toggle">
-          Manage Recipe
-        <div class="dropdown-menu">
-          <li><a class="dropdown-item" href="#">To Shopping List</a></li>
-          <li><a class="dropdown-item" href="#">Edit Recipe</a></li>
-          <li><a class="dropdown-item" href="#">Delete Recipe</a></li>
+  <div class="col-5">
+    <div class="row my-3">
+      <div class="col">
+        <h1>{{recipe.name}}</h1>
+      </div>
+    </div>
+    <div class="row my-3">
+      <div class="col">
+        <div class="btn-group">
+          <button class="btn btn-primary dropdown-toggle">
+              Manage Recipe
+            <div class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">To Shopping List</a></li>
+              <li><a class="dropdown-item" href="#">Edit Recipe</a></li>
+              <li><a class="dropdown-item" href="#">Delete Recipe</a></li>
+            </div>
+          </button>
         </div>
-      </button>
+      </div>
+    </div>
+    <div class="row my-2">
+      <div class="col">
+        <p>{{recipe.description}}</p>
+      </div>
+    </div>
+    <div class="row my-2">
+      <div class="col">
+          <p>Ingredients</p>
+      </div>
     </div>
   </div>
-</div>
-
-<div class="row">
-  <div class="col">Desciption</div>
-</div>
-
-<div class="row">
-  <div class="col">Ingredients</div>
 </div>

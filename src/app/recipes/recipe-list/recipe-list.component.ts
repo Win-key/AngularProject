@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Recipe } from "src/app/recipes/recipe.model";
 
 @Component({
@@ -14,9 +14,15 @@ export class RecipeListComponent implements OnInit {
     new  Recipe('Chutney Sandwich','Bombay Grilled Chutney Sandwich','http://picturetherecipe.com/wp-content/uploads/2018/06/Bombay-Grilled-Chutney-Sandwich-Featured-PictureTheRecipe-680x900.jpg')
   ];
 
+  @Output() recipeListEmitter = new EventEmitter<Recipe>();
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  onClickRecipeItem(recipe : Recipe){
+    this.recipeListEmitter.emit(recipe);
   }
 
 }

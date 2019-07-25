@@ -4,16 +4,16 @@
       <div class="row">
         <div class="col-5 form-group">
           <label for="name">Name</label>
-          <input type="text" id="name" class="form-control">
+          <input type="text" id="name" class="form-control" #nameValue>
         </div>
         <div class="col-2 form-group">
           <label for="name">Amount</label>
-          <input type="text" id="amount" class="form-control">
+          <input type="text" id="amount" class="form-control" #amountValue>
         </div>
       </div>
       <div class="row">
         <div class="col">
-          <button class="btn btn-success mx-1" type="submit">Add</button>
+          <button class="btn btn-success mx-1" type="button" (click)="onAdd()">Add</button>
           <button class="btn btn-danger mx-1" type="button">Delete</button>
           <button class="btn btn-primary mx-1" type="button">Clear</button>
         </div>
