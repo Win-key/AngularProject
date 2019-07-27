@@ -13,12 +13,12 @@
         <a class="nav-link" href="#" (click)="onSelect('shopping')">Shopping List</a>
       </li>
     </ul>
-    <ul class="navbar-nav my-2 my-lg-0">
-      <li class="nav-item dropdown" appDropdown>
+    <ul class="navbar-nav m-2 my-lg-0" >
+      <li class="nav-item dropdown" appDropdown #dd="appDropdown" style="margin-right: 75px">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Dropdown
         </a>
-        <div class="dropdown-menu" #ddMenu aria-labelledby="navbarDropdown">
+        <div class="dropdown-menu clearfix" [ngClass]="{'show' : dd.isShow}" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="#">Save Data</a>
           <a class="dropdown-item" href="#">Fetch Data</a>
         </div>
