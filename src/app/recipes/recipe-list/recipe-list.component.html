@@ -1,9 +1,11 @@
-<button class="btn btn-success mx-2 mt-2">New Recipe</button>
+<button class="btn btn-success mx-2 mt-2" (click)="onNewRecipe()">New Recipe</button><!--routerLink="new"-->
 <div class="row m-2">
     <div class="col list-group">
         <app-recipe-item 
-        *ngFor="let recipeEl of recipes"
-        [recipe]="recipeEl" >
+        *ngFor="let recipeEl of recipes; let i=index"
+        [recipe]="recipeEl"
+        [index]="i" 
+        >
         </app-recipe-item>
     </div>
 </div>

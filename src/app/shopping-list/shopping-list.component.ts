@@ -5,8 +5,7 @@ import { ShoppingListService } from './shopping-list.service';
 @Component({
   selector: 'app-shopping-list',
   templateUrl: './shopping-list.component.html',
-  styleUrls: ['./shopping-list.component.css'],
-  providers : [ShoppingListService]
+  styleUrls: ['./shopping-list.component.css']
 })
 export class ShoppingListComponent implements OnInit {
 
@@ -22,6 +21,10 @@ export class ShoppingListComponent implements OnInit {
 
   onShopEditEmitter(ingredient : Ingredient){
     this.shoppingListService.putIngredient(ingredient);
+  }
+
+  editIngredients(index : number){
+    this.shoppingListService.shoppingEditSubject.next(index);
   }
 
 }
