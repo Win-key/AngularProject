@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col">
-    <form>
+    <form [formGroup]='recipeForm' (submit)="onSubmit()">
       <div class="row form-group">
         <div class="col">
           <button class="btn btn-success m-1 mt-2" type="submit">Save</button>
@@ -10,13 +10,13 @@
       <div class="row form-group">
         <label for="name" class="col-form-label col-2">Name</label>
         <div class="col-10">
-          <input type="text" class="form-control" name="name" id="name">
+          <input type="text" class="form-control" name="name" id="name" formControlName="name">
         </div>
       </div>
       <div class="row form-group">
         <label for="imagePath" class="col-form-label col-2">Image Path</label>
         <div class="col-10">
-          <input type="text" name="imagePath" id="imagePath" class="form-control">
+          <input type="text" name="imagePath" id="imagePath" class="form-control" formControlName="imgPath">
         </div>
       </div>
       <div class="row form-group">
@@ -28,18 +28,23 @@
       <div class="row form-group">
         <label for="description" class="col-form-label col-2">Description</label>
         <div class="col-10">
-          <textarea name="description" id="description" cols="20" rows="3" class="form-control"></textarea>
+          <textarea name="description" id="description" cols="20" rows="3" class="form-control"  formControlName="description"></textarea>
         </div>
       </div>
-      <div class="row">
-        <div class="col-9 ">
-          <input type="text" name="ingredient" id="ingredient" class="form-control">
-        </div>
-        <div class="col-2">
-          <input type="number" name="amount" id="amount" class="form-control">
-        </div>
-        <div class="col-1">
-          <button class="btn btn-danger float-right">&times;</button>
+      <div class="row" formArrayName="ingredients"> 
+        <div class="col">
+          <div class="row"  *ngFor="let ingredientCtrl of recipeForm.get('ingredients').controls; let i = index"
+            [formGroupName]="i">
+            <div class="col-9 my-1">
+              <input type="text" name="ingredient" id="ingredient" class="form-control" formControlName="name">
+            </div>
+            <div class="col-2">
+              <input type="number" name="amount" id="amount" class="form-control" formControlName="amount">
+            </div>
+            <div class="col-1">
+              <button class="btn btn-danger float-right">&times;</button>
+            </div>
+          </div>
         </div>
       </div>
     </form>

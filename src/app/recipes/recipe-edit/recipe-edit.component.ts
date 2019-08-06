@@ -1,6 +1,11 @@
-import { Params } from '@angular/router';
-import { ActivatedRoute } from '@angular/router';
+import { element } from 'protractor';
 import { Component, OnInit } from '@angular/core';
+import { Params, ActivatedRoute } from '@angular/router';
+import { FormGroup, FormControl, FormArray } from "@angular/forms";
+
+import { Recipe } from './../recipe.model';
+
+import { RecipeService } from './../recipe.service';
 
 @Component({
   selector: 'app-recipe-edit',
@@ -10,7 +15,9 @@ import { Component, OnInit } from '@angular/core';
 export class RecipeEditComponent implements OnInit {
   id : number;
   editMode = false;
-  constructor(private route : ActivatedRoute) { }
+  recipeForm : FormGroup;
+  constructor(private route : ActivatedRoute,
+              private recipeService : RecipeService) { }
 
   ngOnInit() {
     this.route.params.subscribe(
@@ -18,7 +25,46 @@ export class RecipeEditComponent implements OnInit {
         this.id = +param['id'];
         this.editMode = param['id'] != null;
         //console.log(this.editMode);
+        this.initForm();
       });
+  }
+
+  private initForm(){
+    let recipeName = '';
+    let description = '';
+    let imgPath = '';
+    let recipeIngredients = new FormArray([]);
+
+    if (this.editMode){
+      let recipe : Recipe = this.recipeService.getRecipe(this.id);
+      recipeName = recipe.name;
+      imgPath    = recipe.imagePath;
+      description = recipe.description;
+      if(recipe.ingredients){
+        for(let ingredient of recipe.ingredients){
+          recipeIngredients.push(new FormGroup({
+            'name' : new FormControl(ingredient.name),
+            'amount' : new FormControl(ingredient.amount)
+          }));
+        }
+        // recipe.ingredients.forEach(element => {
+        //   recipeIngredients.push(new FormGroup({
+        //     'name' : new FormControl(element.name),
+        //     'amount' : new FormControl(element.amount)
+        //   }));
+        // });
+      }
+    }
+    this.recipeForm = new FormGroup({
+      'name' : new FormControl(recipeName),
+      'description' : new FormControl(description),
+      'imgPath': new FormControl(imgPath),
+      'ingredients' : recipeIngredients
+    });
+  }
+
+  public onSubmit(){
+    console.log(this.recipeForm);
   }
 
 }
