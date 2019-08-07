@@ -1,10 +1,13 @@
-<div class="row">
+<app-ngx-modal [imagePath]="recipeForm.get('imgPath').value"></app-ngx-modal>
+<div class="row" style="height: 550px; overflow-y: scroll">
   <div class="col">
     <form [formGroup]='recipeForm' (submit)="onSubmit()">
       <div class="row form-group">
         <div class="col">
           <button class="btn btn-success m-1 mt-2" type="submit">Save</button>
           <button class="btn btn-danger m-1 mt-2" type="button">Cancel</button>
+          <button class="btn btn-primary m-1 mt-2" type="button"
+            (click)="onPreview()">Preview Image</button>
         </div>
       </div>
       <div class="row form-group">
@@ -19,12 +22,16 @@
           <input type="text" name="imagePath" id="imagePath" class="form-control" formControlName="imgPath">
         </div>
       </div>
-      <div class="row form-group">
+      <!--<div class="row">
         <label for="imagePreview" class="col-form-label col-2">Image Preview</label>
-        <div class="col-10">
-          <img src="" alt="" class="img-fluid img-thumbnail" id="imagePreview" class="form-control">
+        <div class="col-10 text-center">
+          <img [src]="recipeForm.get('imgPath').value" 
+                alt="Image Not loaded" 
+                class="img-fluid img-thumbnail"
+                id="imagePreview" 
+                style="max-height:300px; max-width: 300px">
         </div>
-      </div>
+      </div>-->
       <div class="row form-group">
         <label for="description" class="col-form-label col-2">Description</label>
         <div class="col-10">

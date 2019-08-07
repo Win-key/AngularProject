@@ -6,6 +6,8 @@ import { Recipe } from "src/app/recipes/recipe.model";
 export class RecipeService {
 
   public selectedRecipeEmitter = new EventEmitter<Recipe>();
+  public imagePathEmitter = new EventEmitter<string>();
+  
   ingredients : Ingredient[] = [
     new Ingredient('Sugar',5),
     new Ingredient('Corn',10)

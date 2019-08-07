@@ -6,6 +6,7 @@ import { FormGroup, FormControl, FormArray } from "@angular/forms";
 import { Recipe } from './../recipe.model';
 
 import { RecipeService } from './../recipe.service';
+import { NgxSmartModalService } from 'ngx-smart-modal';
 
 @Component({
   selector: 'app-recipe-edit',
@@ -17,7 +18,8 @@ export class RecipeEditComponent implements OnInit {
   editMode = false;
   recipeForm : FormGroup;
   constructor(private route : ActivatedRoute,
-              private recipeService : RecipeService) { }
+              private recipeService : RecipeService,
+              public ngxSmartModalService: NgxSmartModalService) { }
 
   ngOnInit() {
     this.route.params.subscribe(
@@ -65,6 +67,14 @@ export class RecipeEditComponent implements OnInit {
 
   public onSubmit(){
     console.log(this.recipeForm);
+  }
+
+  /**
+   * onPreview
+   */
+  public onPreview() {
+    this.recipeService.imagePathEmitter.emit(this.recipeForm.get('imgPath').value);
+    this.ngxSmartModalService.getModal('imageModal').open();
   }
 
 }
