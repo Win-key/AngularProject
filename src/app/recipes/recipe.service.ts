@@ -1,12 +1,12 @@
+import { Recipe } from './recipe.model';
 import { Ingredient } from './../shared/ingredient.model';
 import { Injectable, EventEmitter } from '@angular/core';
-import { Recipe } from "src/app/recipes/recipe.model";
 
 @Injectable()
 export class RecipeService {
 
   public selectedRecipeEmitter = new EventEmitter<Recipe>();
-  public imagePathEmitter = new EventEmitter<string>();
+  public newRecipeEmitter = new EventEmitter();
   
   ingredients : Ingredient[] = [
     new Ingredient('Sugar',5),
@@ -23,6 +23,12 @@ export class RecipeService {
   }
   getRecipe(id : number){
     return this.recipes[id];
+  }
+  updateRecipe(index:number, recipe :Recipe){
+    this.recipes[index] = recipe;
+  }
+  addRecipe( recipe :Recipe){
+    this.recipes.push(recipe);
   }
   constructor() { }
 }

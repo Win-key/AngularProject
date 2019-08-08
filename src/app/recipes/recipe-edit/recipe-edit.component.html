@@ -1,12 +1,13 @@
-<app-ngx-modal [imagePath]="recipeForm.get('imgPath').value"></app-ngx-modal>
+<app-ngx-modal [imagePath]="recipeForm.get('imagePath').value"></app-ngx-modal>
 <div class="row" style="height: 550px; overflow-y: scroll">
   <div class="col">
     <form [formGroup]='recipeForm' (submit)="onSubmit()">
       <div class="row form-group">
         <div class="col">
           <button class="btn btn-success m-1 mt-2" type="submit">Save</button>
-          <button class="btn btn-danger m-1 mt-2" type="button">Cancel</button>
+          <button class="btn btn-danger m-1 mt-2" type="button" (click)="onCancel()">Cancel</button>
           <button class="btn btn-primary m-1 mt-2" type="button"
+            *ngIf="recipeForm.value['imagePath']"
             (click)="onPreview()">Preview Image</button>
         </div>
       </div>
@@ -19,7 +20,7 @@
       <div class="row form-group">
         <label for="imagePath" class="col-form-label col-2">Image Path</label>
         <div class="col-10">
-          <input type="text" name="imagePath" id="imagePath" class="form-control" formControlName="imgPath">
+          <input type="text" name="imagePath" id="imagePath" class="form-control" formControlName="imagePath">
         </div>
       </div>
       <!--<div class="row">
@@ -38,6 +39,11 @@
           <textarea name="description" id="description" cols="20" rows="3" class="form-control"  formControlName="description"></textarea>
         </div>
       </div>
+      <div class="row my-1" >
+        <div class="col text-center">
+          <button class="btn btn-primary" type="button" (click)="onAddIngredient()">Add Ingredient</button>
+        </div>
+      </div>
       <div class="row" formArrayName="ingredients"> 
         <div class="col">
           <div class="row"  *ngFor="let ingredientCtrl of recipeForm.get('ingredients').controls; let i = index"
@@ -49,7 +55,7 @@
               <input type="number" name="amount" id="amount" class="form-control" formControlName="amount">
             </div>
             <div class="col-1">
-              <button class="btn btn-danger float-right">&times;</button>
+              <button class="btn btn-danger float-right" type="button" (click)="onRemoveIngr(i)">&times;</button>
             </div>
           </div>
         </div>

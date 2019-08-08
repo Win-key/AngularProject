@@ -1,6 +1,6 @@
 import { element } from 'protractor';
 import { Component, OnInit } from '@angular/core';
-import { Params, ActivatedRoute } from '@angular/router';
+import { Params, ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl, FormArray } from "@angular/forms";
 
 import { Recipe } from './../recipe.model';
@@ -18,6 +18,7 @@ export class RecipeEditComponent implements OnInit {
   editMode = false;
   recipeForm : FormGroup;
   constructor(private route : ActivatedRoute,
+              private router : Router,
               private recipeService : RecipeService,
               public ngxSmartModalService: NgxSmartModalService) { }
 
@@ -34,13 +35,13 @@ export class RecipeEditComponent implements OnInit {
   private initForm(){
     let recipeName = '';
     let description = '';
-    let imgPath = '';
+    let imagePath = '';
     let recipeIngredients = new FormArray([]);
 
     if (this.editMode){
       let recipe : Recipe = this.recipeService.getRecipe(this.id);
       recipeName = recipe.name;
-      imgPath    = recipe.imagePath;
+      imagePath    = recipe.imagePath;
       description = recipe.description;
       if(recipe.ingredients){
         for(let ingredient of recipe.ingredients){
@@ -49,32 +50,52 @@ export class RecipeEditComponent implements OnInit {
             'amount' : new FormControl(ingredient.amount)
           }));
         }
-        // recipe.ingredients.forEach(element => {
-        //   recipeIngredients.push(new FormGroup({
-        //     'name' : new FormControl(element.name),
-        //     'amount' : new FormControl(element.amount)
-        //   }));
-        // });
       }
     }
     this.recipeForm = new FormGroup({
       'name' : new FormControl(recipeName),
       'description' : new FormControl(description),
-      'imgPath': new FormControl(imgPath),
+      'imagePath': new FormControl(imagePath),
       'ingredients' : recipeIngredients
     });
   }
 
   public onSubmit(){
     console.log(this.recipeForm);
+    // let recipe : Recipe = new Recipe(
+    //   this.recipeForm.value["name"],
+    //   this.recipeForm.value["description"],
+    //   this.recipeForm.value["imgPath"],
+    //   this.recipeForm.value["ingredients"]
+    // );
+    if (this.editMode) {
+      this.recipeService.updateRecipe(this.id,this.recipeForm.value);
+    } else {
+      this.recipeService.addRecipe(this.recipeForm.value);
+      this.recipeService.newRecipeEmitter.emit();
+    }
+    this.onCancel();
   }
 
-  /**
-   * onPreview
-   */
   public onPreview() {
-    this.recipeService.imagePathEmitter.emit(this.recipeForm.get('imgPath').value);
     this.ngxSmartModalService.getModal('imageModal').open();
+  }
+
+  public onAddIngredient(){
+    (<FormArray>this.recipeForm.get('ingredients')).push(
+      new FormGroup({
+        'name'  : new FormControl(),
+        'amount': new FormControl()
+      })
+    );
+  }
+
+  public onRemoveIngr(index : number){
+    (<FormArray>this.recipeForm.get('ingredients')).controls.splice(index, 1);
+  }
+
+  public onCancel(){
+    this.router.navigate(['../'], {relativeTo : this.route});
   }
 
 }
