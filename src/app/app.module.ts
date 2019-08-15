@@ -14,6 +14,7 @@ import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-ed
 import { DropdownDirective } from './shared/dropdown.directive';
 
 import { ShoppingListService } from './shopping-list/shopping-list.service';
+import { RecipeService } from './recipes/recipe.service';
 import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { NgxSmartModalModule } from 'ngx-smart-modal';
@@ -42,6 +43,7 @@ import { NgxModalComponent } from './recipes/ngx-modal/ngx-modal.component';
     AppRoutingModule
   ],
   providers: [
+    RecipeService,
     ShoppingListService
   ],
   bootstrap: [AppComponent]

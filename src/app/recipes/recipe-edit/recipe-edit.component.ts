@@ -72,7 +72,6 @@ export class RecipeEditComponent implements OnInit {
       this.recipeService.updateRecipe(this.id,this.recipeForm.value);
     } else {
       this.recipeService.addRecipe(this.recipeForm.value);
-      this.recipeService.newRecipeEmitter.emit();
     }
     this.onCancel();
   }
@@ -91,7 +90,7 @@ export class RecipeEditComponent implements OnInit {
   }
 
   public onRemoveIngr(index : number){
-    (<FormArray>this.recipeForm.get('ingredients')).controls.splice(index, 1);
+    (<FormArray>this.recipeForm.get('ingredients')).removeAt(index);
   }
 
   public onCancel(){

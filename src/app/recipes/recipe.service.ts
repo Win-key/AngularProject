@@ -29,6 +29,7 @@ export class RecipeService {
   }
   addRecipe( recipe :Recipe){
     this.recipes.push(recipe);
+    this.newRecipeEmitter.emit();
   }
   constructor() { }
 }
