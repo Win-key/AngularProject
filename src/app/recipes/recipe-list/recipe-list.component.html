@@ -1,5 +1,5 @@
 <button class="btn btn-success mx-2 mt-2" (click)="onNewRecipe()">New Recipe</button><!--routerLink="new"-->
-<div class="row m-2">
+<div class="row m-2" style="overflow-y: scroll;max-height: 500px;">
     <div class="col list-group">
         <app-recipe-item 
         *ngFor="let recipeEl of recipes; let i=index"

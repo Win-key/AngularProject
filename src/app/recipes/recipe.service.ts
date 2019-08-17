@@ -26,9 +26,14 @@ export class RecipeService {
   }
   updateRecipe(index:number, recipe :Recipe){
     this.recipes[index] = recipe;
+    this.newRecipeEmitter.emit();
   }
   addRecipe( recipe :Recipe){
     this.recipes.push(recipe);
+    this.newRecipeEmitter.emit();
+  }
+  setRecipes(recipes : Recipe[]){
+    this.recipes = recipes;
     this.newRecipeEmitter.emit();
   }
   constructor() { }

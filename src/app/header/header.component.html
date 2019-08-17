@@ -19,8 +19,8 @@
           Dropdown
         </a>
         <div class="dropdown-menu clearfix" [ngClass]="{'show' : dd.isShow}" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item cursor"  >Save Data</a>
-          <a class="dropdown-item cursor" >Fetch Data</a>
+          <a class="dropdown-item cursor" (click)="dataStorageService.storeRecipeData()"  >Save Data</a>
+          <a class="dropdown-item cursor" (click)="dataStorageService.getRecipeData()" >Fetch Data</a>
         </div>
       </li>
     </ul>
