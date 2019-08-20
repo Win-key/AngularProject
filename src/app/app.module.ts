@@ -20,6 +20,8 @@ import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.compon
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { NgxSmartModalModule } from 'ngx-smart-modal';
 import { NgxModalComponent } from './recipes/ngx-modal/ngx-modal.component';
+import { SignUpComponent } from './auth/sign-up/sign-up.component';
+import { SignInComponent } from './auth/sign-in/sign-in.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import { NgxModalComponent } from './recipes/ngx-modal/ngx-modal.component';
     DropdownDirective,
     RecipeStartComponent,
     RecipeEditComponent,
-    NgxModalComponent
+    NgxModalComponent,
+    SignUpComponent,
+    SignInComponent
   ],
   imports: [
     BrowserModule,

@@ -1,20 +1,18 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand"  routerLink="/">Recipe Book</a>
+  <a class="navbar-brand"  routerLink="/recipe">Recipe Book</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
+    <ul class="navbar-nav " *ngIf="isAuth()">
       <li class="nav-item" routerLinkActive="active h6">
         <a class="nav-link" routerLink="/recipe">Recipe</a>
       </li>
       <li class="nav-item"  routerLinkActive="active h6">
         <a class="nav-link"  routerLink="/shopping-list" >Shopping List</a>
       </li>
-    </ul>
-    <ul class="navbar-nav m-2 my-lg-0" >
-      <li class="nav-item dropdown" appDropdown #dd="appDropdown" style="margin-right: 75px">
+      <li class="nav-item dropdown" appDropdown #dd="appDropdown">
         <a class="nav-link dropdown-toggle cursor" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Dropdown
         </a>
@@ -22,6 +20,23 @@
           <a class="dropdown-item cursor" (click)="dataStorageService.storeRecipeData()"  >Save Data</a>
           <a class="dropdown-item cursor" (click)="dataStorageService.getRecipeData()" >Fetch Data</a>
         </div>
+      </li>
+    </ul>
+    <ul class="navbar-nav ml-auto" >
+      <li class="nav-item mr-2">
+        <span class="nav-link">
+          <a class=" btn btn-primary"  routerLink="/sign-in" *ngIf="!isAuth()" >Sign IN</a>
+        </span>
+      </li>
+      <li class="nav-item mr-2">
+        <span class="nav-link">
+          <a class=" btn btn-outline-success"  routerLink="/sign-up" *ngIf="!isAuth()" >Sign UP</a>
+        </span>
+      </li>
+      <li class="nav-item mr-2">
+        <span class="nav-link">
+          <a class=" btn btn-outline-success"  (click)="onLogOut()" *ngIf="isAuth()" >Log OUT</a>
+        </span>
       </li>
     </ul>
   </div>

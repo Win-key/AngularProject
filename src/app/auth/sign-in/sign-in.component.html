@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="row mt-4">
+    <div class="col">
+      <form (ngSubmit)="onSign(form)" #form="ngForm">
+        <div class="row form-group">
+          <div class="col-6 offset-3">
+            <label for="emailId" class="col-form-label">Email ID</label>
+            <input type="text" class="form-control" id="emailId" name="email" ngModel>
+          </div>
+        </div>
+        <div class="row form-group">
+          <div class="col-6 offset-3">
+            <label for="password" class="col-form-label">Password</label>
+            <input type="password" class="form-control" id="password" name="password" ngModel>
+          </div>
+        </div>
+
+        <button class="btn btn-success btn-lg" style="margin-left: 45%" type="submit" >Sign In</button>
+
+      </form>
+    </div>
+  </div>
+</div>
