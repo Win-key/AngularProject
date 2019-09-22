@@ -1,0 +1,31 @@
+<h1>Upload Here</h1>
+ 
+<!--<div>
+  <input #fileInput type="file" ng2FileSelect [uploader]="uploader"/>
+ 
+  <div class="drop-box" ng2FileDrop
+       [ngClass]="{'dragover': isDropOver}"
+       [uploader]="uploader"
+       (fileOver)="fileOverAnother($event)"
+       (click)="fileClicked()">
+    <span class="drag-in-title">Import or drag file here</span>
+    <span class="drag-over-title">Drop the file</span>
+  </div>
+</div>-->
+
+<form [formGroup] = "uploadForm" (ngSubmit)="onSubmit()">
+  <div class="row">
+    <div class="col-10">
+      <input type="file" #fileInput name="profile" (change)="onFileSelect($event)" />
+      <div class="drop-box"
+        (click)="fileClicked()">
+        <span class="drag-in-title">Import or drag file here</span>
+        <span class="drag-over-title">Drop the file</span>
+      </div>
+      <span *ngFor="let filename of uploadedfiles">{{ filename }}</span>
+    </div>
+    <div class="col-2" style="top:15px">
+      <button class="btn btn-primary" type="submit">Upload</button>
+    </div>
+  </div>
+</form>

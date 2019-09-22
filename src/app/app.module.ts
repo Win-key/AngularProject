@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { FileUploadModule } from "ng2-file-upload";
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -24,6 +25,7 @@ import { SignUpComponent } from './auth/sign-up/sign-up.component';
 import { SignInComponent } from './auth/sign-in/sign-in.component';
 import { StoreModule } from "@ngrx/store";
 import { ShoppingListReducer } from "src/app/shopping-list/store/shopping-list.reducers";
+import { FileUplaodComponent } from './file-uplaod/file-uplaod.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,8 @@ import { ShoppingListReducer } from "src/app/shopping-list/store/shopping-list.r
     RecipeEditComponent,
     NgxModalComponent,
     SignUpComponent,
-    SignInComponent
+    SignInComponent,
+    FileUplaodComponent
   ],
   imports: [
     BrowserModule,
@@ -49,6 +52,7 @@ import { ShoppingListReducer } from "src/app/shopping-list/store/shopping-list.r
     NgxSmartModalModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
+    FileUploadModule,
     StoreModule.forRoot({shoppingList : ShoppingListReducer})
   ],
   providers: [
